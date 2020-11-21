@@ -1,0 +1,13 @@
+w: move up
+a: move left
+s: move down
+d: move right
+b: move back to nexus in same lane
+t: teleport to another lane
+f: attack a nearby monster
+p: use a potion
+e: equip an item
+c: cast a spell
+m: enter market to buy item
+q: quit game
+i: show information

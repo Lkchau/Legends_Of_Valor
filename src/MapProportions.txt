@@ -1,0 +1,4 @@
+Koulou: 0.2
+Cave: 0.2
+Bush: 0.2
+Common: 0.4
