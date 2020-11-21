@@ -1,3 +1,0 @@
-Inaccessible: 0.2
-Common: 0.6
-Market: 0.2
