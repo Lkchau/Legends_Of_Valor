@@ -23,9 +23,11 @@ public class Weapon extends Item implements Equippable{
         this.handsNeeded = handsNeeded;
     }
 
-    // Unused
+    // Set the equipped weapon for a hero
     @Override
     public void equip(Character character) {
-
+        if(character instanceof Hero){
+            ((Hero) character).getInv().setEquippedWeapon(this);
+        }
     }
 }

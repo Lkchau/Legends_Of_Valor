@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 // Spell representation that is castable
 public class Spell extends Item implements Castable {
     /*
@@ -37,10 +39,22 @@ public class Spell extends Item implements Castable {
         this.mana = mana;
     }
 
-    // Cast (doesn't do anything, I forgot about it... would be better to use this instead of my current implementation of casting a spell)
+    // Cast a spell and apply a debuff based on the type of spell it is
     @Override
-    public void cast(Buffable b) {
-
+    public boolean cast(Character c, Debuffable b) {
+        if(c instanceof Hero){
+            Hero h = (Hero) c;
+            if(this.getMana().getMana() > h.getMana().getMana()){
+                return false;
+            }
+        else{
+                b.debuff(this);
+                h.setMana(new Mana(h.getMana().getMana()-this.getMana().getMana()));
+            }
+            return true;
+        } else{
+            return false;
+        }
     }
 
     public String toString(){

@@ -14,7 +14,7 @@ public class IceSpell extends Spell{
     }
 
     @Override
-    public void cast(Buffable b) {
-        super.cast(b);
+    public boolean cast(Character c, Debuffable b) {
+        return super.cast(c,b);
     }
 }

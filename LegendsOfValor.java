@@ -75,7 +75,8 @@ public class LegendsOfValor extends RolePlayingGameWithMap{
         } while(!quit);
 
     }
-
+    // First for loop checks if there is a hero in the monster's nexus, and if so print out that they won and end the game
+    // Second for loop checks if there is a monster in the hero's nexus and if so print out that the heroes lost and end the game
     private void checkWin(){
         Board currBoard = map.getBoard();
         for(int i = 0; i < currBoard.getWidth();i++) {
@@ -106,7 +107,7 @@ public class LegendsOfValor extends RolePlayingGameWithMap{
             }
         }
     }
-
+    // Check if a monster fainted and if so, remove them from the map and update the alive heroes
     private void checkFaintedMonster(){
         for(Party p: parties){
             if(p.getPartyType().equalsIgnoreCase("Monster")){
@@ -136,6 +137,7 @@ public class LegendsOfValor extends RolePlayingGameWithMap{
         }
     }
 
+    // Check if a hero fainted, if so revive the hero
     private void checkFaintedHero(){
         boolean heroRevived = false;
         for(Party p: parties){
@@ -158,15 +160,17 @@ public class LegendsOfValor extends RolePlayingGameWithMap{
         }
     }
 
+    // Print out the losing screen and set to quit the game
     private void printLosingScreen() {
         System.out.println(Colors.getColors().coloredString("red", "                                                                          \r\n@@@@@@@      @@@@@@@@     @@@@@@@@     @@@@@@@@      @@@@@@      @@@@@@@  \r\n@@@@@@@@     @@@@@@@@     @@@@@@@@     @@@@@@@@     @@@@@@@@     @@@@@@@  \r\n@@!  @@@     @@!          @@!          @@!          @@!  @@@       @@!    \r\n!@!  @!@     !@!          !@!          !@!          !@!  @!@       !@!    \r\n@!@  !@!     @!!!:!       @!!!:!       @!!!:!       @!@!@!@!       @!!    \r\n!@!  !!!     !!!!!:       !!!!!:       !!!!!:       !!!@!!!!       !!!    \r\n!!:  !!!     !!:          !!:          !!:          !!:  !!!       !!:    \r\n:!:  !:!     :!:          :!:          :!:          :!:  !:!       :!:    \r\n :::: ::      :: ::::      ::           :: ::::     ::   :::        ::    \r\n:: :  :      : :: ::       :           : :: ::       :   : :        :     \r\n                                                                          "));
         quit = true;
     }
-
+    // Print out the victory screen and set to quit the game
     private void printVictoryScreen(){
         System.out.println("         .* *.               `o`o`\r\n         *. .*              o`o`o`o      ^,^,^\r\n           * \\               `o`o`     ^,^,^,^,^\r\n              \\     ***        |       ^,^,^,^,^\r\n               \\   *****       |        /^,^,^\r\n                \\   ***        |       /\r\n    ~@~*~@~      \\   \\         |      /\r\n  ~*~@~*~@~*~     \\   \\        |     /\r\n  ~*~@smd@~*~      \\   \\       |    /     #$#$#        .`'.;.\r\n  ~*~@~*~@~*~       \\   \\      |   /     #$#$#$#   00  .`,.',\r\n    ~@~*~@~ \\        \\   \\     |  /      /#$#$#   /|||  `.,'\r\n_____________\\________\\___\\____|_/______/_________|\\/\\___||______\r\n                       "+Colors.getColors().coloredString("blue","V I C T O R Y !"));
         quit = true;
     }
+
     // Play out one turn of the rpg
     private void playOneTurn(UserPrompt prompter, Party p) {
         for(Character c: p.getParty()){
@@ -292,6 +296,7 @@ public class LegendsOfValor extends RolePlayingGameWithMap{
         }
     }
 
+    // Ask the user if they want to cast a spell
     private boolean promptSpellCast(Hero c, Debuffable enemy){
         HashMap<Integer, String> inventoryMap = new HashMap<>();
         int index = 1;
@@ -303,17 +308,13 @@ public class LegendsOfValor extends RolePlayingGameWithMap{
         if(response == -1) return  false;
         Item spell = c.getInv().getByItemName(inventoryMap.get(response).split(" ")[0]);
         if(spell instanceof Spell){
-            if(((Spell) spell).getMana().getMana() > c.getMana().getMana()){
-                return false;
-            }
-            else{
-                enemy.debuff((Spell) spell);
-                c.setMana(new Mana(c.getMana().getMana()-((Spell) spell).getMana().getMana()));
-            }
+            return ((Spell) spell).cast(c,enemy);
+        } else{
+            return false;
         }
-        return true;
     }
 
+    // Ask the user if they want to drink a potion
     private boolean promptPotionDrink(Hero c){
         HashMap<Integer, String> inventoryMap = new HashMap<>();
         int index = 1;
@@ -335,6 +336,7 @@ public class LegendsOfValor extends RolePlayingGameWithMap{
         }
     }
 
+    // play the enemy's turn
     private void playEnemyTurn(Party p) {
         printEnemyScreen();
         for(Character c: p.getParty()){
@@ -348,10 +350,14 @@ public class LegendsOfValor extends RolePlayingGameWithMap{
         printCurrentMap();
 
     }
+
+    // print out the screen to indicate the enemy's turn
     public void printEnemyScreen(){
         System.out.println("   .\r\n  / \\\r\n  | |\r\n  | |\r\n  |.|                                         "+ Colors.getColors().coloredString("red","E N E M Y ' S   T U R N") +"\r\n  |.|\r\n  |:|\r\n  |:|\r\n`--8--'\r\n   8\r\n   O");
     }
 
+
+    // prompt user to equip an item
     private boolean promptEquipItem(Hero c){
         HashMap<Integer, String> inventoryMap = new HashMap<>();
         int index = 1;
@@ -363,13 +369,7 @@ public class LegendsOfValor extends RolePlayingGameWithMap{
         if(response != -1){
             Item equip = c.getInv().getByItemName(inventoryMap.get(response));
             if(equip instanceof Equippable){
-                if(equip instanceof Weapon){
-
-                    c.getInv().setEquippedWeapon((Weapon) equip);
-                }
-                else if(equip instanceof Armor){
-                    c.getInv().setEquippedArmor((Armor) equip);
-                }
+                ((Equippable) equip).equip(c);
             }
             return true;
         }

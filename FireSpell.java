@@ -13,7 +13,7 @@ public class FireSpell extends Spell {
         this(new Name(), new Money(), new Level(), new Damage(), new Mana());
     }
     @Override
-    public void cast(Buffable b) {
-        super.cast(b);
+    public boolean cast(Character c, Debuffable b) {
+        return super.cast(c,b);
     }
 }

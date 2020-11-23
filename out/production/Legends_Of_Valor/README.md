@@ -1,10 +1,10 @@
-**LEGENDS MONSTERS AND HEROES README**
+**LEGENDS OF VALOR README**
 
-Name: Leo Chau
+Name: Leo Chau, Navoneel Ghosh
 
-Email: lchau@bu.edu
+Email: lchau@bu.edu, navghosh@bu.edu
 
-BU ID: U48783299
+BU ID: U48783299, 
 
 **Compilation Instructions:**
 
@@ -36,7 +36,6 @@ Menu - The following classes have to do with the representation of menus and the
 There is also a menu factory to create and a general menu. I most likely could have cut down on the amount of menus.
 
 AbstractMenuFactory
-BattleActionMenu
 BuyArmorMenu
 BuyFireSpellMenu
 BuyIceSpellMenu
@@ -79,13 +78,16 @@ LegendsMap
 
 Tile - the following classes are different tiles in a board and also the factory for them
 
-CommonTile
+CommonTile (Plain tiles)
 InaccessibleTile
-MarketTile
+NexusTile 
 Enterable (interface)
 Tile
 TileFactory
 TileFactoryInterface
+CaveTile
+KoulouTile
+BushTile
 
 Stats - the following classes are used to represent the idea of stats that a hero can have and to maintain the stats instead
 of having to maintain each stat separately within the hero class
@@ -142,6 +144,9 @@ Inventory
 Debuffable (interface)
 Experience
 Monster
+Spirit
+Dragon
+Exoskeleton
 MonsterFactory
 Name
 Paladin

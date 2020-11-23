@@ -12,6 +12,8 @@ public class Hero extends Character implements Buffable{
     protected Mana baseMana;
     protected Damage defense;
 
+    protected HeroStats statsBeforTileBuffs = new HeroStats();
+
     // Constructors
     public Hero(Name name, Health hp, Level level, boolean fainted, Money wallet, HeroStats stats, Mana mana, Experience exp, Inventory inv){
         super(name, hp, level, fainted);
@@ -106,6 +108,14 @@ public class Hero extends Character implements Buffable{
 
     public void setBaseHP(Health baseHP) {
         this.baseHP = baseHP;
+    }
+
+    public void setStatsBeforTileBuffs(HeroStats statsBeforTileBuffs) {
+        this.statsBeforTileBuffs = statsBeforTileBuffs;
+    }
+
+    public HeroStats getStatsBeforTileBuffs() {
+        return statsBeforTileBuffs;
     }
 
     // Attack an attackable item

@@ -14,9 +14,12 @@ public class Armor extends Item implements Equippable {
         this(new Name(),new Money(), new Level(), new Damage());
     }
 
-    // Didn't end up using this, because I forgot about it and implemented in the Battle class... the battle class does too much now
+
+    // Set the equipped armor for a hero
     @Override
     public void equip(Character character) {
-
+        if(character instanceof Hero) {
+            ((Hero) character).getInv().setEquippedArmor(this);
+        }
     }
 }
