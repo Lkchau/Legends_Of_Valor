@@ -151,6 +151,21 @@ public class Hero extends Character implements Buffable{
                 break;
         }
     }
+    
+    // Apply a area buff to self
+    public void buff(String stat, double amountToBuff){
+        switch (stat) {
+            case "Strength":
+                this.stats.addStr(amountToBuff);
+                break;
+            case "Dexterity":
+                this.stats.addDex(amountToBuff);
+                break;
+            case "Agility":
+                this.stats.addAgl(amountToBuff);
+                break;
+        }
+    }
 
     // Calculate and decrease health based on damage of another entity
     public void receiveDamage(Damage enemyDamage){

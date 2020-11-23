@@ -530,37 +530,91 @@ public class LegendsOfValor extends RolePlayingGameWithMap{
     // Perform a move on the map and trigger any events based on what tile the party enters
     private boolean performMove(String res, Character c){
         boolean moved = false;
+        Tile prevTile = map.getBoard().getBoard()[c.getCurrRow()][c.getCurrCol()];
         switch(res){
             case "W":
             case "w":
                 moved = this.map.move(c,"w");
+                if(c instanceof Hero && moved) {
+                	Tile currTile = map.getBoard().getBoard()[c.getCurrRow()][c.getCurrCol()];
+                	 this.removeAreaBuff(c, prevTile);
+                	 this.addAreaBuff(c, currTile);
+                }
                 break;
             case "A":
             case "a":
                 moved = this.map.move(c,"a");
+                if(c instanceof Hero && moved) {
+                	Tile currTile = map.getBoard().getBoard()[c.getCurrRow()][c.getCurrCol()];
+                	 this.removeAreaBuff(c, prevTile);
+                	 this.addAreaBuff(c, currTile);
+                }
                 break;
             case "S":
             case "s":
                 moved = this.map.move(c,"s");
+                if(c instanceof Hero && moved) {
+                	Tile currTile = map.getBoard().getBoard()[c.getCurrRow()][c.getCurrCol()];
+                	 this.removeAreaBuff(c, prevTile);
+                	 this.addAreaBuff(c, currTile);
+                }
                 break;
             case "D":
             case "d":
                 moved = this.map.move(c,"d");
+                if(c instanceof Hero && moved) {
+                	Tile currTile = map.getBoard().getBoard()[c.getCurrRow()][c.getCurrCol()];
+                	 this.removeAreaBuff(c, prevTile);
+                	 this.addAreaBuff(c, currTile);
+                }
                 break;
             case "B":
             case "b":
                 moved = this.map.move(c,"b");
+                if(c instanceof Hero && moved) {
+                	Tile currTile = map.getBoard().getBoard()[c.getCurrRow()][c.getCurrCol()];
+                	 this.removeAreaBuff(c, prevTile);
+                	 this.addAreaBuff(c, currTile);
+                }
                 break;
             case "T":
             case "t":
                 moved = this.map.move(c,"t");
-
+                if(c instanceof Hero && moved) {
+                	Tile currTile = map.getBoard().getBoard()[c.getCurrRow()][c.getCurrCol()];
+                	 this.removeAreaBuff(c, prevTile);
+                	 this.addAreaBuff(c, currTile);
+                }
                 break;
             default:
                 break;
         }
         return moved;
 
+    }
+    
+    private void addAreaBuff(Character c, Tile currTile) {
+    	if(currTile instanceof BushTile){
+            ((BushTile) currTile).enter(c);
+        }
+    	if(currTile instanceof CaveTile){
+            ((CaveTile) currTile).enter(c);
+        }
+    	if(currTile instanceof KoulouTile){
+            ((KoulouTile) currTile).enter(c);
+        }
+    }
+    
+    private void removeAreaBuff(Character c, Tile prevTile) {
+    	if(prevTile instanceof BushTile){
+            ((BushTile) prevTile).exit(c);
+        }
+    	if(prevTile instanceof CaveTile){
+            ((CaveTile) prevTile).exit(c);
+        }
+    	if(prevTile instanceof KoulouTile){
+            ((KoulouTile) prevTile).exit(c);
+        }
     }
 
     // Print out instructions
