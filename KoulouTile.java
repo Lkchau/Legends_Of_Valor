@@ -8,11 +8,11 @@ public class KoulouTile extends Tile implements Enterable{
 
 	@Override
 	public void enter(Character c) {
-		((Hero) c).buff("Strength",0.1);
+		((Hero) c).buff("Strength",1.1);
 		
 	}
 	
 	public void exit(Character c) {
-		((Hero) c).buff("Strength",-0.1);
+		((Hero) c).buff("Strength",-1.1);
 	}
 }

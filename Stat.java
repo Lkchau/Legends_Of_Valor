@@ -30,6 +30,14 @@ public class Stat {
         this.statValue = this.statValue + valueToAdd.statValue;
     }
 
+    protected void multStat(double toMult){
+        this.setStatValue((int) (this.statValue * toMult));
+    }
+
+    protected void divStat(double toDiv){
+        this.setStatValue((int) Math.round(this.statValue / toDiv));
+    }
+
     @Override
     public String toString() {
         return "Stats{" +

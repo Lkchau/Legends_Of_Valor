@@ -7,11 +7,12 @@ public class CaveTile extends Tile implements Enterable{
 
 	@Override
 	public void enter(Character c) {
-		((Hero) c).buff("Agility",0.1);
+        Hero hero = (Hero) c;
+		hero.buff("Agility",1.1);
 		
 	}
 	
 	public void exit(Character c) {
-		((Hero) c).buff("Agility",-0.1);
+		((Hero) c).buff("Agility",-1.1);
 	}
 }

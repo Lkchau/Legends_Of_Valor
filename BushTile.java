@@ -7,11 +7,11 @@ public class BushTile extends Tile implements Enterable{
 
 	@Override
 	public void enter(Character c) {
-		((Hero) c).buff("Dexterity",0.1);
+		((Hero) c).buff("Dexterity",1.1);
 		
 	}
 	
 	public void exit(Character c) {
-		((Hero) c).buff("Dexterity",-0.1);
+		((Hero) c).buff("Dexterity",-1.1);
 	}
 }

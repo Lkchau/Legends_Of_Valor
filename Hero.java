@@ -12,8 +12,6 @@ public class Hero extends Character implements Buffable{
     protected Mana baseMana;
     protected Damage defense;
 
-    protected HeroStats statsBeforTileBuffs = new HeroStats();
-
     // Constructors
     public Hero(Name name, Health hp, Level level, boolean fainted, Money wallet, HeroStats stats, Mana mana, Experience exp, Inventory inv){
         super(name, hp, level, fainted);
@@ -110,14 +108,6 @@ public class Hero extends Character implements Buffable{
         this.baseHP = baseHP;
     }
 
-    public void setStatsBeforTileBuffs(HeroStats statsBeforTileBuffs) {
-        this.statsBeforTileBuffs = statsBeforTileBuffs;
-    }
-
-    public HeroStats getStatsBeforTileBuffs() {
-        return statsBeforTileBuffs;
-    }
-
     // Attack an attackable item
     public void attack(Attackable enemy){
         Damage damageDealt = new Damage();
@@ -154,17 +144,33 @@ public class Hero extends Character implements Buffable{
     
     // Apply a area buff to self
     public void buff(String stat, double amountToBuff){
-        switch (stat) {
-            case "Strength":
-                this.stats.addStr(amountToBuff);
-                break;
-            case "Dexterity":
-                this.stats.addDex(amountToBuff);
-                break;
-            case "Agility":
-                this.stats.addAgl(amountToBuff);
-                break;
-        }
+            if(amountToBuff < 0){
+                amountToBuff = -amountToBuff;
+                switch (stat) {
+                    case "Strength":
+                        this.stats.divStr(amountToBuff);
+                        break;
+                    case "Dexterity":
+                        this.stats.divDex(amountToBuff);
+                        break;
+                    case "Agility":
+                        this.stats.divAgl(amountToBuff);
+                        break;
+                }
+            } else{
+                switch (stat) {
+                    case "Strength":
+                        this.stats.multStr(amountToBuff);
+                        break;
+                    case "Dexterity":
+                        this.stats.multDex(amountToBuff);
+                        break;
+                    case "Agility":
+                        this.stats.multAgl(amountToBuff);
+                        break;
+                }
+            }
+
     }
 
     // Calculate and decrease health based on damage of another entity

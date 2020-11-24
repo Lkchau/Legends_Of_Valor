@@ -64,6 +64,31 @@ public class HeroStats {
         this.agl.addAgl(toAdd);
     }
 
+
+    public void multDex(double toMult){
+        this.dex.multDex(toMult);
+    }
+
+    public void multStr(double toMult){
+        this.str.multStr(toMult);
+    }
+
+    public void multAgl(double toMult){
+        this.agl.multAgl(toMult);
+    }
+
+    public void divDex(double toDiv){
+        this.dex.divDex(toDiv);
+    }
+
+    public void divStr(double toDiv){
+        this.str.divStr(toDiv);
+    }
+
+    public void divAgl(double toDiv){
+        this.agl.divAgl(toDiv);
+    }
+
     public void addAllStats(double addStr, double addDex, double addAgl){
         this.addStr(addStr);
         this.addDex(addDex);

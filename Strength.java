@@ -15,6 +15,12 @@ public class Strength extends Stat{
     public void addStr(Strength toAdd){
         this.addStat(toAdd);
     }
+    public void multStr(double toMult){
+        this.multStat(toMult);
+    }
+    public void divStr(double toDiv){
+        this.divStat(toDiv);
+    }
 
     public String toString(){
         return ""+getStatValue();

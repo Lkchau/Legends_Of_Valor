@@ -48,7 +48,7 @@ public class Spell extends Item implements Castable {
                 return false;
             }
         else{
-                b.debuff(this);
+                b.debuff(c,this);
                 h.setMana(new Mana(h.getMana().getMana()-this.getMana().getMana()));
             }
             return true;

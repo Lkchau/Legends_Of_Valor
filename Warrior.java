@@ -17,7 +17,7 @@ public class Warrior extends Hero{
     public void levelUp(){
         if(exp.getExp() >= getLevel().getLevel()*10 + 10){
             super.levelUp();
-            this.stats.addAllStats(0.1, 0.1, 0.05);
+            this.stats.addAllStats(0.1, 0.05, 0.1);
         }
 
     }

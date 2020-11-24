@@ -16,6 +16,14 @@ public class Dexterity extends Stat{
         this.addStat(statToAdd);
     }
 
+    public void multDex(double toMult){
+        this.multStat(toMult);
+    }
+
+    public void divDex(double toDiv){
+        this.divStat(toDiv);
+    }
+
     public String toString(){
         return ""+getStatValue();
     }

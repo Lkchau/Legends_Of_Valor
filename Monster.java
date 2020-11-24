@@ -58,8 +58,12 @@ public class Monster extends Character implements Debuffable{
 
     // apply a debuff based on the spell cast on the character
     @Override
-    public void debuff(Spell spell){
+    public void debuff(Character caster, Spell spell){
         boolean dodged = calculateDodge();
+        Hero hero = new Hero();
+        if(caster instanceof Hero){
+            hero = (Hero) caster;
+        }
         if(!dodged){
             if(spell instanceof IceSpell){
                 damage.reduceDamage(0.1);
@@ -70,7 +74,9 @@ public class Monster extends Character implements Debuffable{
             else if(spell instanceof LightningSpell){
                 dodgeChance = dodgeChance - (int) Math.round(dodgeChance * 0.1);
             }
-            this.receiveDamage(spell.getDamage(), dodged);
+            int spellDamageBasedOnDex = Math.round(hero.getStats().getDex().getStatValue()/10000);
+            Damage spellDamage = new Damage(spellDamageBasedOnDex + spell.getDamage().getDamage());
+            this.receiveDamage(spellDamage);
         }
 
     }

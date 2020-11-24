@@ -17,6 +17,14 @@ public class Agility extends Stat{
         this.addStat(toAdd);
     }
 
+    public void multAgl(double toMult){
+        this.multStat(toMult);
+    }
+
+    public void divAgl(double toDiv){
+        this.divStat(toDiv);
+    }
+
     public String toString(){
         return ""+getStatValue();
     }
